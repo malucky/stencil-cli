@@ -4,7 +4,7 @@ var Path = require('path');
 var ThemeConfig = require('../../../lib/theme-config');
 var handlers = {};
 var internals = {
-    options: {}    
+    options: {}
 };
 
 module.exports.register = function (server, options, next) {
@@ -116,7 +116,7 @@ handlers.onRequest = function(request, reply) {
     request.app.decorators = request.app.decorators || [];
 
     // Only add the SDK if stencilEditor is a query parameter or the cookie preview_config_id is set
-    if (request.query.stencilEditor || (request.headers.cookie || '').indexOf('stencil_preview') !== -1) {
+    if (true) {
         request.app.decorators.push(function (content) {
             var scriptTags = '<script src="' + '//localhost:' + internals.options.stencilEditorPort + '/dist/sdk.js"></script>\n';
             return content.replace(new RegExp('</body>'), scriptTags + '\n</body>');

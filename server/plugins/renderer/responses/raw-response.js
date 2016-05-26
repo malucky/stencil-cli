@@ -10,7 +10,7 @@ module.exports = function (request, data, headers, statusCode) {
     this.respond = function (request, reply) {
         var response;
         // TODO This will change when we build the new checkout in SFP.
-        if (request.url.path.indexOf('/checkout.php') === 0 || request.url.path.indexOf('/finishorder.php') === 0) {
+        if (request.url.path.indexOf('/checkout') === 0 || request.url.path.indexOf('/checkout.php') === 0 || request.url.path.indexOf('/finishorder.php') === 0) {
             response = reply(internals.appendCss(data));
         } else {
             response = reply(data);
@@ -35,7 +35,7 @@ module.exports = function (request, data, headers, statusCode) {
 internals.appendCss = function (buffer) {
     if (buffer) {
         var dom = cheerio.load(buffer);
-        dom('head').append('<link href="/stencil/'+ internals.stubActiveVersion + '/' + internals.stubActiveConfig + '/css/checkout.css" type="text/css" rel="stylesheet">');
+        dom('head').append('<link data-stencil-stylesheet href="/stencil/'+ internals.stubActiveVersion + '/' + internals.stubActiveConfig + '/css/checkout.css" type="text/css" rel="stylesheet">');
         return dom.html();
     }
 
